@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <link rel="stylesheet" href="">
+</head>
+<body>
+  <main>
+    <h2>List of Authors</h2>
+    <ul>
+      <% for(let i =0; i < authors.length; i++){ %>
+        <li>
+          <a href="/authors/<%= authors[i]._id%>"><%= authors[i].name %></a>
+        </li>
+      <%}%>
+    </ul>
+  </main>
+
+</body>
+</html>
