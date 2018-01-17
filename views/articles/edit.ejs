@@ -23,6 +23,27 @@
 	</header>
 	<main>
 		<form action="/articles/<%= article.id %>?_method=PUT" method="POST">
+
+      <select name="authorId">
+        <%  for(let i = 0; i < authors.length; i++) { %>
+            <option value="<%= authors[i]._id %>"
+
+                <% if(authors[i]._id.toString() === articleAuthor._id.toString()) {%>
+                      selected
+
+                <% } %>
+              ><%= authors[i].name%></option>
+          <% } %>
+      </select>
+
+
+
+
+
+
+
+
+
 			<input type="text" name="title" value="<%= article.title %>"><br>
 			<textarea name="body" rows="5" cols="50">
 				<%= article.body %>

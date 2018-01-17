@@ -1,7 +1,7 @@
 const express = require('express');
 const router  = express.Router();
 const Author  = require('../models/author.js')
-
+const Article = require('../models/article.js')
 
 // this route needs to
 // use our model to find all the authors
@@ -52,7 +52,16 @@ router.get('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   Author.findByIdAndRemove(req.params.id, (err, deletedAuthor) => {
-    res.redirect('/authors')
+    // we need to find all of the author's articles id's
+    // in order to delete all the articles from the articles collection
+    const articleIds = [];
+    for (let i =0; i < deletedAuthor.articles.length; i++){
+      articleIds.push(deletedAuthor.articles[i]._id);
+    }
+
+    Article.remove({ _id: { $in: articleIds}}, ( err, data) => {
+         res.redirect('/authors')
+    })
   })
 })
 
