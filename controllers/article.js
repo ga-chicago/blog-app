@@ -2,7 +2,18 @@ const express = require('express');
 const router = express.Router();
 
 const Article = require('../models/article.js');
-const Promise = global.Promise;
+
+
+
+const Author = require('../models/author.js')
+
+router.get('/test', (req, res) => {
+  
+  res.send("check mongo")
+})
+
+
+
 
 router.get('/', (req, res) => {
   Article.find({}, (err, foundArticles) => {
