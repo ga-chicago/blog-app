@@ -26,15 +26,23 @@ router.get('/:id/edit', (req, res) => {
   prom.then(art => console.log(res)).catch(err=>console.log(err))
   // Article.findById(req.params.id, (err, foundArticle) => {
   //   if(err ) console.log(err);
-  //   res.render('articles/edit.ejs', { article: foundArticle });    
+  //   res.render('articles/edit.ejs', { article: foundArticle });
   // })
 })
 
 router.get('/:id', (req, res) => {
   Article.findById(req.params.id, (err, foundArticle) => {
-    res.render('articles/show.ejs', {article: foundArticle})    
-  })
-})
+
+      Author.findOne({'articles._id': req.params.id}, (err, foundAuthor) => {
+
+        res.render('articles/show.ejs', {
+                                          article: foundArticle,
+                                          author: foundAuthor
+                                              })
+
+      })
+  });
+});
 
 // note: 3 mongo operations
 router.post('/', (req, res) => {
@@ -48,11 +56,11 @@ router.post('/', (req, res) => {
       // put the article in the array
       foundAuthor.articles.push(createdArticle);
       foundAuthor.save((err, data) => {
-        res.redirect('/articles')    
+        res.redirect('/articles')
       });
-    
+
     })
-    
+
   })
 
 
