@@ -4,7 +4,7 @@ const Article = require('./article.js')
 
 const authorSchema = new mongoose.Schema({
   name: { type: String },
-  articles: [Article.articleSchema]
+  articles: [Article.schema]
 })
 
 
