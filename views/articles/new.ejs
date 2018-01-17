@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Add a new article</title>
+</head>
+<body>
+	<header>
+		<h1>Create an article</h1>
+		<nav>
+			<ul>
+				<li>
+					<a href="/">Home</a>
+				</li>
+				<li>
+					<a href="/articles">Articles Index</a>
+				</li>
+			</ul>
+		</nav>
+	</header>
+	<form action="/articles" method="POST">
+		<label>Title</label><br>
+		<input type="text" name="title" /><br>
+		<label>Article Text</label><br>
+		<textarea name="body" rows="10" cols="50">
+			
+		</textarea><br>
+		<input type="submit" value="Publish Article!">
+	</form>
+</body>
+</html>

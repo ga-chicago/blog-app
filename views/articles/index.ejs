@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Article list</title>
+</head>
+<body>
+	<header>
+		<h1>Articles</h1>
+		<nav>
+			<ul>
+				<li>
+					<a href="/">Home</a>
+				</li>
+				<li>
+					<a href="/articles/new">Create a new article</a>
+				</li>
+			</ul>
+		</nav>
+	</header>
+	<main>
+		<h2>
+			List of Articles
+		</h2>
+		<ul>
+			<% for (let i = 0; i < articles.length; i++) { -%>
+				<li>
+					<a href="/articles/<%= articles[i].id %>"><%= articles[i].title %></a>
+					<form action="/articles/<%= articles[i].id %>?_method=DELETE" method="POST">
+						<button>Delete</button>					
+					</form>
+				</li>
+			<% } -%>
+		</ul>
+	</main>
+</body>
+</html>

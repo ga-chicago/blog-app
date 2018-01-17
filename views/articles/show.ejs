@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		<%= article.title %>
+	</title>
+</head>
+<body>
+	<header>
+		<h1><%= article.title %></h1>
+		<nav>
+			<ul>
+				<li>
+					<a href="/">Home</a>
+				</li>
+				<li>
+					<a href="/articles">Articles index</a>
+				</li>
+			</ul>
+		</nav>
+	</header>
+	<main>
+		<section>
+			<%= article.body %>
+		</section>
+
+		<section>
+			<p>
+				<a href="/articles/<%=article.id%>/edit">Edit this article</a>
+			</p>
+			<form action="/articles/<%=article.id%>?_method=DELETE" method="POST">
+				<button>Delete this terrible terrible article</button>
+			</form>
+		</section>
+	</main>
+</body>
+</html>
