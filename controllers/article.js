@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const Article = require('../models/article.js');
-const Promise = global.Promise;
+const Author = require('../models/author.js')
 
 router.get('/', (req, res) => {
   Article.find({}, (err, foundArticles) => {
@@ -13,7 +13,11 @@ router.get('/', (req, res) => {
 })
 
 router.get('/new', (req, res) => {
-  res.render('articles/new.ejs');
+  Author.find({}, (err, allAuthors) => {
+    res.render('articles/new.ejs', {
+      authors: allAuthors
+    });
+  })
 })
 
 router.get('/:id/edit', (req, res) => {
@@ -32,12 +36,34 @@ router.get('/:id', (req, res) => {
   })
 })
 
+// note: 3 mongo operations
 router.post('/', (req, res) => {
-  // res.send(req.body);
-  Article.create(req.body, (err, createdArticle) => {
-    if(err) console.log(err);
-    else res.redirect('/articles');
+
+  // find/fget the author
+  Author.findById(req.body.authorId, (err, foundAuthor) => {
+
+    // save article in articles collection
+    Article.create(req.body, (err, createdArticle) => {
+
+      // put the article in the array
+      foundAuthor.articles.push(createdArticle);
+      foundAuthor.save((err, data) => {
+        res.redirect('/articles')    
+      });
+    
+    })
+    
   })
+
+
+
+
+
+  // // res.send(req.body);
+  // Article.create(req.body, (err, createdArticle) => {
+  //   if(err) console.log(err);
+  //   else res.redirect('/articles');
+  // })
 })
 
 router.delete('/:id', (req, res) => {

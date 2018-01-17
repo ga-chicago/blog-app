@@ -18,8 +18,17 @@
 		</nav>
 	</header>
 	<form action="/articles" method="POST">
-		<label>Title</label><br>
-		<input type="text" name="title" /><br>
+		
+		<label for="authorId">Author:</label>
+		<select id="authorId" name="authorId">
+			<% for (var i = 0; i < authors.length; i++) { -%>
+				<option value="<%= authors[i].id %>"><%= authors[i].name %></option>
+			<% } -%>
+		</select>
+
+		<br />
+		<label for="title">Title</label><br>
+		<input id="title" type="text" name="title" /><br>
 		<label>Article Text</label><br>
 		<textarea name="body" rows="10" cols="50">
 			
